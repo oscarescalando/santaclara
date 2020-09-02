@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:santaclara/onboarding/ui/screen/widget/const_theme.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
 
 class SliderTile extends StatelessWidget {

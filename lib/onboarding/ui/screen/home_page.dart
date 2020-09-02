@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:santaclara/onboarding/model/slider_model.dart';
+import 'package:santaclara/onboarding/ui/screen/widget/const_theme.dart';
 import 'package:santaclara/onboarding/ui/screen/widget/sliderTile.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
-import 'package:santaclara/routes/routes.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
