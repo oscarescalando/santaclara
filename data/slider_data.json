@@ -1,0 +1,36 @@
+{
+    "slider" :[
+        {
+            "logo"      : "assets/images/logo.png",
+            "image"     : "assets/images/a.png",
+            "title"     : "We care about \n your safety",
+            "desc1"     : "Due to Covid-19 outbreak, we \n are teaking extra precautions to \n keep our players and staff safe",
+            "desc2"     : "",
+            "headlogo"  : "true"
+        },
+        {
+            "logo"      : "assets/images/logo.png",
+            "image"     : "assets/images/b.png",
+            "title"     : "Before you visit us, \n you should",
+            "desc1"     : "Make a booking at our website or \n  email, and pay the fee. We are not \n admiting payments at the Golf Club \n for safety reasons. Kepp your \n BOOKING NUMBER to register.",
+            "desc2"     : "Make sure to bring your facemask, \n with you. If you don'n have one, \n our staff can provided it for you.",
+            "headlogo"  : "false"
+        },
+        {
+            "logo"      : "assets/images/logo.png",
+            "image"     : "assets/images/c.png",
+            "title"     : "When you arribe, \n follow this instructions",
+            "desc1"     : "Web established a contact-less procedure \n for your safety and confort. You'll need \n your BOOKING Number to create \n your access pass.",
+            "desc2"     : "You will only access when it's your \n start time, to accomplish social distancing. \n You'll have sealed water and hand \n sanitizer provided by our sraff.",
+            "headlogo"  : "false"
+        },
+        {
+            "logo"      : "assets/images/logo.png",
+            "image"     : "assets/images/d.png",
+            "title"     : "Thank you for \n trusting us and \n play safe!",
+            "desc1"     : "Web established a contact-less procedure \n for your safety and confort. You'll need \n your BOOKING Number to create \n your access pass.",
+            "desc2"     : "Welcome to Santa Clara Golf Club. \n We hope you enjoy the experience.",
+            "headlogo"  : "false"
+        }
+    ]
+}
