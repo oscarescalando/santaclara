@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:santaclara/onboarding/providers/slider_provider.dart';
+import 'dart:io';
+import 'package:santaclara/onboarding/model/slider_model.dart';
+import 'package:santaclara/onboarding/ui/screen/widget/sliderTile.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
+import 'package:santaclara/routes/routes.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -9,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<SliderModel> slides = new List<SliderModel>();
   int currentIndex = 0;
   PageController pageController = new PageController(initialPage: 0);
 
@@ -26,55 +30,108 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    //TODO: implement initState
     super.initState();
+    slides = getSlides();
   }
 
   @override
   Widget build(BuildContext context) {
+    final double shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
+    final theme = ThemeLayout(isMobile: useMobileLayout);
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Santa Clara 1'),
-        ),
         backgroundColor: grisFondo,
         body: PageView.builder(
-          controller: pageController,
-          itemCount: countSilder,
-          onPageChanged: (val) {
-            setState(() {
-              currentIndex = val;
-            });
-          },
-        ));
+            controller: pageController,
+            itemCount: slides.length,
+            onPageChanged: (val) {
+              setState(() {
+                currentIndex = val;
+              });
+            },
+            itemBuilder: (context, index) {
+              return SliderTile(
+                  logoAssetPath: slides[index].getLogoPath(),
+                  imageAssetPath: slides[index].getImagePath(),
+                  title: slides[index].getTitle(),
+                  desc1: slides[index].getDesc1(),
+                  desc2: slides[index].getDesc2(),
+                  logoHead: slides[index].getHeadLogo());
+            }),
+        bottomSheet: currentIndex != slides.length - 1
+            ? _navButon(theme.btnNav, theme.fontNav)
+            : _butonEnd(theme.btnEnd, theme.fontBtn));
   }
 
-  Widget _lista() {
-    return FutureBuilder(
-      future: sliderProvider.cargarData(),
-      //initialData: [],
-      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-        return ListView(
-          children: _listaItems(snapshot.data, context),
-        );
-      },
+  Widget _navButon(double btnNav, double fontNav) {
+    return Container(
+      height: Platform.isIOS ? btnNav : btnNav - 20,
+      margin: EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                pageController.animateToPage(slides.length - 1,
+                    duration: Duration(milliseconds: 400),
+                    curve: Curves.linear);
+              },
+              child: Text(
+                'SKIP',
+                style: TextStyle(
+                  fontSize: fontNav,
+                ),
+              )),
+          Row(
+            children: [
+              for (int i = 0; i < slides.length; i++)
+                currentIndex == i
+                    ? pageIndexIndicator(true)
+                    : pageIndexIndicator(false),
+            ],
+          ),
+          GestureDetector(
+              onTap: () {
+                pageController.animateToPage(
+                  currentIndex + 1,
+                  duration: Duration(milliseconds: 400),
+                  curve: Curves.linear,
+                );
+              },
+              child: Text(
+                'NEXT',
+                style: TextStyle(
+                  fontSize: fontNav,
+                ),
+              )),
+        ],
+      ),
     );
   }
 
-  List<Widget> _listaItems(List<dynamic> data, BuildContext context) {
-    final List<Widget> opciones = [];
-
-    data.forEach((opt) {
-      //   final widgetTemp = ListTile(
-      //     title: Text(opt['texto']),
-      //     leading: getIcon(opt['icon']),
-      //     trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
-      //     onTap: () {
-      //       Navigator.pushNamed(context, opt['ruta']);
-      //     },
-      //   );
-
-      //   opciones..add(widgetTemp)..add(Divider());
-    });
-    // return opciones;
+  Widget _butonEnd(double btnEnd, double fontBtn) {
+    return Container(
+      height: Platform.isIOS ? btnEnd : btnEnd - 20,
+      color: new Color.fromRGBO(232, 81, 30, 1),
+      alignment: Alignment.center,
+      //child: Text("GET STARTED NOW", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+      child: ButtonTheme(
+        minWidth: double.infinity,
+        child: MaterialButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed('/home');
+          },
+          child: Text(
+            "GET STARTED NOW",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: fontBtn,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
