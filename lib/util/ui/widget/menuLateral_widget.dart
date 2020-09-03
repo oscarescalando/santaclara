@@ -1,7 +1,18 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
 
-class MenuLateral extends StatelessWidget {
+class MenuLateral extends StatefulWidget {
+  MenuLateral({Key key}) : super(key: key);
+
+  @override
+  _MenuLateralState createState() => _MenuLateralState();
+}
+
+class _MenuLateralState extends State<MenuLateral> {
+  Future<void> _launched;
+
   @override
   Widget build(BuildContext context) {
     return new Drawer(
@@ -15,19 +26,11 @@ class MenuLateral extends StatelessWidget {
               accountName: Text("SANTA CLARA GOLF MARBELLA",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
               //accountEmail: Text("info@santaclaragolfmarbella.com"),
-              currentAccountPicture: new Container(
-                alignment: Alignment.center,
-                height: 100,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // decoration:  BoxDecoration(
-                  //  image: DecorationImage(
-                  children: <Widget>[
-                    Image.asset('assets/images/logo.png'),
-                  ],
-                  //    fit: BoxFit.contain,
-
-                  // ),
+              currentAccountPicture: Center(
+                child: new Image(
+                  image: new AssetImage('assets/images/logo.png'),
+                  height: 280,
+                  alignment: Alignment.center,
                 ),
               ),
               // ),
@@ -50,12 +53,13 @@ class MenuLateral extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     _buildButtonColumn(
-                        blanco, Icons.golf_course, 'Email', context, true),
-                    _buildButtonColumn(blanco, Icons.email, 'Email', context),
+                        blanco, Icons.golf_course, 'Email', context, true, ''),
                     _buildButtonColumn(
-                        blanco, Icons.settings_phone, 'Email', context),
-                    _buildButtonColumn(
-                        blanco, Icons.local_hospital, 'Email', context)
+                        blanco, Icons.email, 'Email', context, false, 'sms'),
+                    _buildButtonColumn(blanco, Icons.settings_phone, 'Email',
+                        context, false, 'santaclara'),
+                    _buildButtonColumn(blanco, Icons.local_hospital, 'Email',
+                        context, false, 'emergency')
                   ])),
           Container(
             padding: EdgeInsets.zero,
@@ -68,7 +72,7 @@ class MenuLateral extends StatelessWidget {
                 "Ctra. N-340 Málaga Cádiz, \nKm. 187,5 Marbella - Málaga",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: fontB2,
                     fontWeight: FontWeight.w400),
               ),
             ),
@@ -77,8 +81,9 @@ class MenuLateral extends StatelessWidget {
               //child: Icon(Icons.keyboard_arrow_left),
               title: Text("HOME",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: fontB3,
                       color: grisFuentePPal,
+                      fontFamily: fontSecon,
                       fontWeight: FontWeight.w300)),
               onTap: () {
                 Navigator.of(context).pushNamed('/home');
@@ -87,8 +92,9 @@ class MenuLateral extends StatelessWidget {
           new ListTile(
             title: Text("TEAM REGISTER",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: fontB3,
                     color: grisFuentePPal,
+                    fontFamily: fontSecon,
                     fontWeight: FontWeight.w300)),
             onTap: () {
               Navigator.of(context).pushNamed('/home');
@@ -98,8 +104,9 @@ class MenuLateral extends StatelessWidget {
           new ListTile(
               title: Text("MY QR CODE",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: fontB3,
                       color: grisFuentePPal,
+                      fontFamily: fontSecon,
                       fontWeight: FontWeight.w300)),
               onTap: () {
                 Navigator.of(context).pushNamed('/home');
@@ -112,31 +119,55 @@ class MenuLateral extends StatelessWidget {
 
   Column _buildButtonColumn(
       Color color, IconData icon, String label, BuildContext context,
-      [isActive = false]) {
+      [bool isActive = false, String type = '']) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.20,
-          height: 45,
-          color: isActive != true ? naranjoSec : naranjo,
-          //margin: EdgeInsets.all(20),
-          child: Icon(icon, color: color),
-        ),
+            width: MediaQuery.of(context).size.width * 0.18,
+            height: 45,
+            color: isActive != true ? naranjoSec : naranjo,
+            //margin: EdgeInsets.all(20),
+            child: IconButton(
+              icon: Icon(icon, color: color),
+              onPressed: () => setState(() {
+                switch (type) {
+                  case 'sms':
+                    {
+                      print('sms');
+                      launch('sms:/$phoneSms');
+                    }
+                    break;
+                  case 'santaclara':
+                    {
+                      print('santaclara');
 
-        /*Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        )*/
+                      _launched = _makePhoneCall('tel://$phoneSantaClara');
+
+                      //launch('tel:$phoneSantaClara');
+                    }
+                    break;
+                  case 'emergency':
+                    {
+                      launch('tel://$phoneEmergency');
+                    }
+                    break;
+                  default:
+                    {}
+                    break;
+                }
+              }),
+            )),
       ],
     );
+  }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

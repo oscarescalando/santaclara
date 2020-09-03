@@ -51,10 +51,11 @@ class SliderTile extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                    fontSize: theme.fontH1,
-                    color: grisFuentePPal,
-                    fontWeight: FontWeight.w300 //Titulo en negritas
-                    ),
+                  fontSize: theme.fontH1,
+                  color: grisFuentePPal,
+                  fontWeight: FontWeight.w300,
+                  fontFamily: fontBase, //Titulo en negritas
+                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(

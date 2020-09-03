@@ -12,7 +12,8 @@ class AppBarPrincipal extends PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text("SANTA CLARA"),
+      centerTitle: true,
+      title: new Text("SANTA CLARA"),
       backgroundColor: this.backColor,
     );
   }
