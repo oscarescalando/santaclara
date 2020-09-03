@@ -12,6 +12,7 @@ const shadows = [
 ];
 
 Color naranjo = const Color(0xffe84f1c);
+Color naranjoSec = const Color(0xffad311c);
 Color grisFondo = const Color(0xffededed);
 Color grisSombra = const Color(0xffdadada);
 Color grisFuentePPal = const Color(0xff706f6f);
