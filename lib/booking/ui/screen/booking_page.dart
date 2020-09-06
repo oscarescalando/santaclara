@@ -23,6 +23,7 @@ class _BookingPageState extends State<BookingPage> {
   @override
   Widget build(BuildContext context) {
     Booking booking = new Booking.fromJson(widget.dataBooking);
+    var media = MediaQuery.of(context).size;
 
     final listBooking = ListView.builder(
         padding: const EdgeInsets.all(8),
@@ -67,48 +68,46 @@ class _BookingPageState extends State<BookingPage> {
                       ),
                     ),
                     SingleChildScrollView(
-                      child: Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          padding:
-                              const EdgeInsets.only(left: 40.0, right: 40.0),
-                          //padding: const EdgeInsets.all(8),
-                          itemCount: booking.data.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Card(
-                              child: ListTile(
-                                leading: Icon(Icons.access_time),
-                                title: Text(
-                                    'Start Time: ${booking.data[index].startTime.substring(0, 5)}'),
-                                subtitle: Text(
-                                    'Playes ${booking.data[index].playersNumber} - Starter Point ${booking.data[index].starterPoint.substring(0, 5)}'),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PlayerBooking(
-                                            id: booking.data[index].id
-                                                .toString(),
-                                            player: booking
-                                                .data[index].playersNumber,
-                                            starterPoint: booking
-                                                .data[index].starterPoint
-                                                .substring(0, 5),
-                                            startTime: booking
-                                                .data[index].startTime
-                                                .substring(0, 5),
-                                            dateBooking: booking
-                                                .data[index].bookingAt
-                                                .toString()),
-                                      ));
-                                },
-                                trailing: Icon(Icons.add),
-                              ),
-                            );
-                          },
-                        ),
+                      // child: Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+                        //padding: const EdgeInsets.all(8),
+                        itemCount: booking.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Card(
+                            child: ListTile(
+                              leading: Icon(Icons.access_time),
+                              title: Text(
+                                  'Start Time: ${booking.data[index].startTime.substring(0, 5)}'),
+                              subtitle: Text(
+                                  'Playes ${booking.data[index].playersNumber} - Starter Point ${booking.data[index].starterPoint.substring(0, 5)}'),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PlayerBooking(
+                                          id: booking.data[index].id.toString(),
+                                          player:
+                                              booking.data[index].playersNumber,
+                                          starterPoint: booking
+                                              .data[index].starterPoint
+                                              .substring(0, 5),
+                                          startTime: booking
+                                              .data[index].startTime
+                                              .substring(0, 5),
+                                          dateBooking: booking
+                                              .data[index].bookingAt
+                                              .toString()),
+                                    ));
+                              },
+                              trailing: Icon(Icons.add),
+                            ),
+                          );
+                        },
                       ),
                     ),
+                    //),
                   ]))),
     );
   }
