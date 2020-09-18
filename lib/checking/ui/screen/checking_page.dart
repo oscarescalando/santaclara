@@ -112,7 +112,10 @@ class _CheckingPageState extends State<CheckingPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           //LogoHead(titulo: "Welcome to Santa Clara"),
-                          LogoHead(titulo: "Welcome to Santa Clara"),
+                          LogoHead(
+                            titulo: "Welcome to Santa Clara",
+                            extra_head: 0,
+                          ),
                           SizedBox(
                             height: sizeBoxB3,
                           ),

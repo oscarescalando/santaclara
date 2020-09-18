@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:santaclara/Player/ui/screen/player_page.dart';
 
 import 'package:santaclara/booking/model/booking_model.dart';
+import 'package:santaclara/registerqr/ui/screen/register_page.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
 import 'package:santaclara/util/ui/widget/appBar_widget.dart';
 import 'package:santaclara/util/ui/widget/logo_head.dart';
@@ -47,9 +48,10 @@ class _BookingPageState extends State<BookingPage> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    //LogoHead(titulo: "Welcome to Santa Clara"),
-                    LogoHead(titulo: "Your Bookings"),
-
+                    LogoHead(
+                      titulo: "Your Bookings",
+                      extra_head: 0,
+                    ),
                     Text(
                       booking.data[0].bookedBy,
                       style: TextStyle(
@@ -109,6 +111,54 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                     //),
                   ]))),
+      floatingActionButton: _newButton(context),
     );
+  }
+
+  Widget _newButton(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+      SizedBox(width: 50),
+      FloatingActionButton.extended(
+        heroTag: 'backHome',
+        onPressed: () {
+          //Navigator.of(context).pushNamed('/home');
+          Navigator.pop(context);
+        },
+        backgroundColor: grisFuentePPal,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        label: Text(
+          '< BACK',
+          style: TextStyle(
+            color: blanco,
+            fontSize: fontB2,
+            //fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      Expanded(child: SizedBox()),
+      FloatingActionButton.extended(
+        heroTag: 'checkIn',
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RegisterPage(),
+              ));
+        },
+        backgroundColor: naranjo,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        label: Text(
+          'CHECK-IN >',
+          style: TextStyle(
+            color: blanco,
+            fontSize: fontB2,
+            //fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      SizedBox(width: 10),
+    ]);
   }
 }

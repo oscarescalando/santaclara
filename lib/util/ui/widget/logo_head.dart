@@ -3,7 +3,8 @@ import 'package:santaclara/util/settings/data_constants.dart';
 
 class LogoHead extends StatelessWidget {
   String titulo;
-  LogoHead({this.titulo});
+  double extra_head;
+  LogoHead({this.titulo, this.extra_head});
   @override
   Widget build(BuildContext context) {
     final double shortestSide = MediaQuery.of(context).size.shortestSide;
@@ -34,7 +35,7 @@ class LogoHead extends StatelessWidget {
           semanticLabel: 'Santa Clara',
         ),
         Positioned(
-          bottom: 0,
+          bottom: 0 + this.extra_head,
           child: Text(this.titulo,
               style: TextStyle(
                 fontSize: fontTitle,
