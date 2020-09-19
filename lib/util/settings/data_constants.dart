@@ -27,6 +27,8 @@ const String phoneSantaClara = '+34 952 850 111';
 const String phoneSms = '34952850111';
 
 const double fontTitle = 30;
+const double fontTitle2 = 25;
+const double fontTitle3 = 22;
 const double fontB1 = 20;
 const double fontB2 = 18;
 const double fontB3 = 16;

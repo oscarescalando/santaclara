@@ -5,7 +5,7 @@ class InfoRegister extends StatelessWidget {
   String info1, info2;
   int linea;
 
-  InfoRegister({this.info1, this.info2, this.linea});
+  InfoRegister({Key key, this.info1, this.info2, this.linea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
