@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:path/path.dart';
+import 'package:santaclara/providers/model/MyQRModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -28,6 +29,9 @@ class DBProvider {
           ' imgqr TEXT'
           ' booking_id TEXT'
           ' info_booking TEXT'
+          ' number_booking INTEGER'
+          ' datebooking TEXT'
+          ' player INTEGER'
           ')');
     });
   }
@@ -43,11 +47,9 @@ class DBProvider {
     return res;
   }
 
-  newBooking() async {
+  newBooking(MyQRModel newMyQRModel) async {
     final db = await database;
-
-    // final res = await db.insert(bookings, modelo.toJson);
-
-    //return res;
+    final res = await db.insert('bookings', newMyQRModel.toJson());
+    return res;
   }
 }
