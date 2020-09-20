@@ -109,7 +109,7 @@ class _MenuLateralState extends State<MenuLateral> {
                       fontFamily: fontSecon,
                       fontWeight: FontWeight.w300)),
               onTap: () {
-                Navigator.of(context).pushNamed('/home');
+                Navigator.of(context).pushNamed('/myqr');
               }),
           Divider(),
         ],

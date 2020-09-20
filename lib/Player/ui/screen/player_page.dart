@@ -17,6 +17,7 @@ class PlayerBooking extends StatefulWidget {
   @override
   _PlayerBookingState createState() => _PlayerBookingState();
   String id, starterPoint, startTime, dateBooking;
+  //Map<String, dynamic> players;
   int player;
   PlayerBooking(
       {Key key,
@@ -35,7 +36,10 @@ class _PlayerBookingState extends State<PlayerBooking> {
   bool isEditing = false;
 
   @override
-  void initState() {}
+  void initState() {
+    print('kkkk');
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

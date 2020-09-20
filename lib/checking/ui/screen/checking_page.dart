@@ -43,6 +43,7 @@ class _CheckingPageState extends State<CheckingPage> {
 
   @override
   Widget build(BuildContext context) {
+    //Formulario para validar booking
     final _singleForm = Container(
         margin: EdgeInsets.only(top: 10.0, left: 80.0, right: 80.0),
         //margin: EdgeInsets.only(top: 10.0, left: 80.0, right: 80.0),
