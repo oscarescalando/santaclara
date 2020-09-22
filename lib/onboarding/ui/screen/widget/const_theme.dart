@@ -19,8 +19,8 @@ class ThemeLayout {
 
   ThemeLayout({this.isMobile}) {
     if (isMobile) {
-      this.btnEnd = 90;
-      this.btnNav = 70;
+      this.btnEnd = 70;
+      this.btnNav = 50;
       this.fontBtn = 15.0;
       this.fontNav = 12.0;
       this.logoHeight = 40.0;

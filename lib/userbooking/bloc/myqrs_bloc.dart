@@ -23,7 +23,8 @@ class MyQRBloc {
   }
 
   agregarQR(MyQRModel myQR) async {
-    await DBProvider.db.newBooking(myQR);
+    //await DBProvider.db.newBooking(myQR);
+    await DBProvider.db.newBookingRaw(myQR);
     obtenerMyQR();
   }
 

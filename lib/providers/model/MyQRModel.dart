@@ -1,18 +1,18 @@
 class MyQRModel {
   int id;
   String imgqr;
-  String booking_id;
-  String info_booking;
-  int number_booking;
+  String bookingid;
+  String infobooking;
+  int numberbooking;
   String datebooking;
   int player;
 
   MyQRModel({
     this.id,
     this.imgqr,
-    this.booking_id,
-    this.info_booking,
-    this.number_booking,
+    this.bookingid,
+    this.infobooking,
+    this.numberbooking,
     this.datebooking,
     this.player,
   });
@@ -20,9 +20,9 @@ class MyQRModel {
   factory MyQRModel.fromJson(Map<String, dynamic> json) => MyQRModel(
         id: json["id"],
         imgqr: json["imgqr"],
-        info_booking: json["info_booking"],
-        booking_id: json["booking_id"],
-        number_booking: json["numbre_booking"],
+        infobooking: json["infobooking"],
+        bookingid: json["bookingid"],
+        numberbooking: json["numbrebooking"],
         datebooking: json["datebooking"],
         player: json["player"],
       );
@@ -30,9 +30,9 @@ class MyQRModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "imgqr": imgqr,
-        "info_booking": info_booking,
-        "booking_id": booking_id,
-        "number_booking": number_booking,
+        "infobooking": infobooking,
+        "bookingid": bookingid,
+        "numberbooking": numberbooking,
         "datebooking": datebooking,
         "player": player,
       };

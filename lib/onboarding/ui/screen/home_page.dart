@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _navButon(double btnNav, double fontNav) {
     return Container(
-      height: Platform.isIOS ? btnNav : btnNav - 20,
+      height: btnNav, //Platform.isIOS ? btnNav : btnNav - 20,
       margin: EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _butonEnd(double btnEnd, double fontBtn) {
     return Container(
-      height: Platform.isIOS ? btnEnd : btnEnd - 20,
+      height: btnEnd, //Platform.isIOS ? btnEnd : btnEnd - 20,
       color: new Color.fromRGBO(232, 81, 30, 1),
       alignment: Alignment.center,
       //child: Text("GET STARTED NOW", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),

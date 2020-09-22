@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     _myQR();
-    print('Register QR');
+    print('Register QR => ${widget.bookingid}');
   }
 
   @override
@@ -126,10 +126,10 @@ class _RegisterPageState extends State<RegisterPage> {
   _myQR() async {
     final myQR = MyQRModel(
         id: int.parse(widget.id),
-        imgqr: _base64,
-        info_booking: 'Register',
-        booking_id: widget.bookingid,
-        number_booking: 1,
+        imgqr: widget.imgQR,
+        infobooking: 'Register',
+        bookingid: widget.bookingid,
+        numberbooking: 1,
         datebooking: widget.dateBooking,
         player: 4);
     myqrBloc.agregarQR(myQR);
