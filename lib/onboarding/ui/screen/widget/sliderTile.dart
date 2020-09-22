@@ -66,7 +66,7 @@ class SliderTile extends StatelessWidget {
                 style: TextStyle(
                     color: grisFuentePPal,
                     fontSize: theme.fontH2,
-                    fontWeight: FontWeight.w100),
+                    fontWeight: FontWeight.w300),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -77,7 +77,7 @@ class SliderTile extends StatelessWidget {
                 style: TextStyle(
                     color: grisFuentePPal,
                     fontSize: theme.fontH2,
-                    fontWeight: FontWeight.w100),
+                    fontWeight: FontWeight.w300),
                 textAlign: TextAlign.center,
               ),
               if (!logoHead)

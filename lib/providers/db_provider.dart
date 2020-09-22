@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:path/path.dart';
-import 'package:santaclara/providers/model/MyQRModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:santaclara/providers/model/MyQRModel.dart';
+export 'package:santaclara/providers/model/MyQRModel.dart';
 
 class DBProvider {
   static Database _database;
@@ -51,5 +52,20 @@ class DBProvider {
     final db = await database;
     final res = await db.insert('bookings', newMyQRModel.toJson());
     return res;
+  }
+
+  Future<MyQRModel> getMyQRId(int id) async {
+    final db = await database;
+    final res = await db.query('bookings', where: 'id = ?', whereArgs: [id]);
+    return res.isNotEmpty ? MyQRModel.fromJson(res.first) : null;
+  }
+
+  Future<List<MyQRModel>> getAllMyQR() async {
+    final db = await database;
+    final res = await db.rawQuery("SELECT * FROM bookings ORDER BY id DESC");
+
+    List<MyQRModel> list =
+        res.isNotEmpty ? res.map((c) => MyQRModel.fromJson(c)).toList() : [];
+    return list;
   }
 }

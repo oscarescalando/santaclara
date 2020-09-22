@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:santaclara/userbooking/ui/widget/botonback_myqr.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
 import 'package:santaclara/util/ui/widget/appBar_widget.dart';
 import 'package:santaclara/util/ui/widget/logo_head.dart';
@@ -13,6 +14,11 @@ class MyQrPage extends StatefulWidget {
 
 class _MyQrPageState extends State<MyQrPage> {
   var isLoading = false;
+  @override
+  void initState() {
+    print('My QR');
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -41,6 +47,7 @@ class _MyQrPageState extends State<MyQrPage> {
                 ],
               ),
             )),
+      floatingActionButton: BotonBackMyQR(),
     );
   }
 }
