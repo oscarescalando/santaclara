@@ -37,7 +37,8 @@ class _PlayerBookingState extends State<PlayerBooking> {
 
   @override
   void initState() {
-    print('kkkk');
+    super.initState();
+    print(widget.id);
   }
 
   @override

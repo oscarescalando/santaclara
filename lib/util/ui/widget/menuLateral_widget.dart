@@ -12,6 +12,14 @@ class MenuLateral extends StatefulWidget {
 
 class _MenuLateralState extends State<MenuLateral> {
   Future<void> _launched;
+  AssetImage _imgBack;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _imgBack = new AssetImage('assets/images/logo.png');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +28,7 @@ class _MenuLateralState extends State<MenuLateral> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           Container(
+            color: naranjo,
             height: MediaQuery.of(context).size.height * 0.35,
             padding: EdgeInsets.zero,
             child: new UserAccountsDrawerHeader(
@@ -28,13 +37,12 @@ class _MenuLateralState extends State<MenuLateral> {
               //accountEmail: Text("info@santaclaragolfmarbella.com"),
               currentAccountPicture: Center(
                 child: new Image(
-                  image: new AssetImage('assets/images/logo.png'),
+                  image: _imgBack,
                   height: 280,
                   alignment: Alignment.center,
                 ),
               ),
               // ),
-
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
