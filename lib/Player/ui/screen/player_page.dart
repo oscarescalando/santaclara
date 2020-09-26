@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:santaclara/Player/ui/widget/botonback_palyer.dart';
 import 'package:santaclara/Player/ui/widget/infoplayer_widget.dart';
+import 'package:santaclara/Player/ui/widget/playerform_widget.dart';
 import 'package:santaclara/Player/ui/widget/titleplayer_widget.dart';
 import 'package:santaclara/Player/provider/players_provider.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
@@ -42,8 +43,11 @@ class _PlayerBookingState extends State<PlayerBooking> {
   void initState() {
     super.initState();
     _playersProvider.id = widget.id;
-    //_playersProvider.getPlayers();
-    //print(widget.id);
+    if(isEditing) {
+      setState(() {
+        _isLoading = true;
+      });
+    }
   }
 
   @override
@@ -79,20 +83,39 @@ class _PlayerBookingState extends State<PlayerBooking> {
   }
 
   Widget _formPlayerData() {
+    int _nroReg = 0;
     return FutureBuilder(
       future: _playersProvider.getPlayers(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length > 0) {
-            print(snapshot.data.length);
+            _nroReg = snapshot.data.length;
+            print('Nro register => ${snapshot.data.length}');
+            print('Nro player => ${widget.player}');
+
+            return Container(
+              padding: const EdgeInsets.only(left:20.0,right: 20.0),
+              child: Column(
+                children: <Widget>[
+                  for (int i = 1; i <= snapshot.data.length; i++)PlayerFormWidget(int.parse(widget.id), scaffolKey, i),
+                  if(widget.player>_nroReg) for (int j = _nroReg; j <= widget.player-1; j++)PlayerFormWidget(int.parse(widget.id), scaffolKey, j+1),
+                ],
+              ),
+
+            );
           } else {
-            print('0');
+            //print('0');
+            return Container(
+              padding: const EdgeInsets.only(left:20.0,right: 20.0),
+              child: Column(
+                children: <Widget>[
+                  for (int i = 1; i <= widget.player; i++)PlayerFormWidget(int.parse(widget.id), scaffolKey, i),
+                ],
+              ),
+
+            );
           }
-          return Container(
-            child: Center(
-              child: Text('Data'),
-            ),
-          );
+
         } else {
           return Container(
             child: Center(

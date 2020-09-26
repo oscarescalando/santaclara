@@ -22,8 +22,28 @@ class PlayerFormWidget extends StatefulWidget {
 }
 
 class _PlayerFormWidgetState extends State<PlayerFormWidget> {
+  var isLoading = false;
+  //Esta variable es para tener el context y poder invocar elementos
+  //final  scaffolKey;
+  final formKey = GlobalKey<FormState>();
+  bool isAutoValidate = false;
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return isLoading
+        ? Center(
+          child: CircularProgressIndicator(),
+        )
+        : ExpansionTile(
+            title: Text(
+              "Player ${widget.indexId}",
+              style: TextStyle(
+              fontSize: fontB2,
+              fontWeight: FontWeight.bold
+            ),
+            ),
+    );
   }
 }

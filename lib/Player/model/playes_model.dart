@@ -34,4 +34,12 @@ class Player {
     countryId = json["country_id"];
     bookingId = json["booking_id"];
   }
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "full_name": fullName,
+    "email": email,
+    "country_id": countryId,
+    "booking_id": bookingId,
+  };
 }
