@@ -90,14 +90,16 @@ class _PlayerBookingState extends State<PlayerBooking> {
         if (snapshot.hasData) {
           if (snapshot.data.length > 0) {
             _nroReg = snapshot.data.length;
-            print('Nro register => ${snapshot.data.length}');
-            print('Nro player => ${widget.player}');
+            //print('Nro register => ${snapshot.data.length}');
+            //print('Nro player => ${widget.player}');
+
+            //print(  snapshot.data[0].fullName);
 
             return Container(
               padding: const EdgeInsets.only(left:20.0,right: 20.0),
               child: Column(
                 children: <Widget>[
-                  for (int i = 1; i <= snapshot.data.length; i++)PlayerFormWidget(int.parse(widget.id), scaffolKey, i),
+                 for (int i = 1; i <= snapshot.data.length; i++)PlayerFormWidget(int.parse(widget.id), scaffolKey, i, snapshot.data[i-1].fullName, snapshot.data[i-1].email, snapshot.data[i-1].countryId, snapshot.data[i-1].id, true),
                   if(widget.player>_nroReg) for (int j = _nroReg; j <= widget.player-1; j++)PlayerFormWidget(int.parse(widget.id), scaffolKey, j+1),
                 ],
               ),
