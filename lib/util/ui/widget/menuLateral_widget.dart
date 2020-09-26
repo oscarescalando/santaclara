@@ -12,13 +12,18 @@ class MenuLateral extends StatefulWidget {
 
 class _MenuLateralState extends State<MenuLateral> {
   Future<void> _launched;
-  AssetImage _imgBack;
+  AssetImage _imgBack = new AssetImage("assets/images/fotosantaclara.jpg");
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _imgBack = new AssetImage('assets/images/logo.png');
+  }
+
+  @override
+  void didChangeDependencies() {
+    precacheImage(_imgBack, context);
+    super.didChangeDependencies();
   }
 
   @override
@@ -37,17 +42,14 @@ class _MenuLateralState extends State<MenuLateral> {
               //accountEmail: Text("info@santaclaragolfmarbella.com"),
               currentAccountPicture: Center(
                 child: new Image(
-                  image: _imgBack,
+                  image: new AssetImage('assets/images/logo.png'),
                   height: 280,
                   alignment: Alignment.center,
                 ),
               ),
               // ),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                        "assets/images/fotosantaclara.jpg"), //NetworkImage("https://santaclaragolfmarbella.com/wp-content/uploads/2020/07/sc_fondoslider_home2-scaled.jpg"),
-                    fit: BoxFit.cover), //color: Colors.green,
+                image: DecorationImage(image: _imgBack, fit: BoxFit.cover),
               ),
             ),
           ),

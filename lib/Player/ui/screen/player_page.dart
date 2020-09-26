@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:santaclara/Player/ui/widget/botonback_palyer.dart';
 import 'package:santaclara/Player/ui/widget/infoplayer_widget.dart';
 import 'package:santaclara/Player/ui/widget/titleplayer_widget.dart';
+import 'package:santaclara/Player/provider/players_provider.dart';
 import 'package:santaclara/util/settings/data_constants.dart';
 import 'package:santaclara/util/ui/widget/appBar_widget.dart';
 import 'package:santaclara/util/ui/widget/menuLateral_widget.dart';
@@ -34,11 +35,15 @@ class _PlayerBookingState extends State<PlayerBooking> {
   final GlobalKey<ScaffoldState> scaffolKey = new GlobalKey<ScaffoldState>();
   bool _isLoading = false;
   bool isEditing = false;
+  String get _url => "${api}booking/players/";
+  final _playersProvider = new PlayersProvider();
 
   @override
   void initState() {
     super.initState();
-    print(widget.id);
+    _playersProvider.id = widget.id;
+    //_playersProvider.getPlayers();
+    //print(widget.id);
   }
 
   @override
@@ -64,11 +69,38 @@ class _PlayerBookingState extends State<PlayerBooking> {
               SizedBox(
                 height: sizeBoxB5,
               ),
+              _formPlayerData(),
             ],
           ),
         ),
       ),
       floatingActionButton: BotonBackPlayer(),
+    );
+  }
+
+  Widget _formPlayerData() {
+    return FutureBuilder(
+      future: _playersProvider.getPlayers(),
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data.length > 0) {
+            print(snapshot.data.length);
+          } else {
+            print('0');
+          }
+          return Container(
+            child: Center(
+              child: Text('Data'),
+            ),
+          );
+        } else {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }
