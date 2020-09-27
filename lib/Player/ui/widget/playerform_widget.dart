@@ -123,8 +123,11 @@ class _PlayerFormWidgetState extends State<PlayerFormWidget> {
 
                                   bool result=false;
                                   int _id;
+
                                   print(widget.isEdit);
+
                                   bool _edit = false;
+
                                   if (widget.isEdit != null) {
                                     _edit = widget.isEdit;
                                   }
@@ -163,15 +166,16 @@ class _PlayerFormWidgetState extends State<PlayerFormWidget> {
                                     setState(() {
                                       isLoading = false;
                                     });
+                                    if(result) {
+                                      mostrarSnackBar('ok');
+                                    } else {
+                                      //mostrarSnackBar('error');
+                                    }
                                   }
 
-                                  print(_id);
+                                  //print(_id);
 
-                                  if(result) {
 
-                                  } else {
-
-                                  }
 
                                 }
                               }
@@ -233,6 +237,10 @@ class _PlayerFormWidgetState extends State<PlayerFormWidget> {
     String _info = 'New player';
     if(op=='edit'){
       _info = 'Update player ';
+    } else {
+      if(op=='ok') {
+        _info = 'Successfully registered';
+      }
     }
     final snackbar = SnackBar(
       content: Text("$_info: $_email , $_fullName "),
