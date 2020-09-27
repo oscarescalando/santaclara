@@ -57,9 +57,9 @@ class _PlayerBookingState extends State<PlayerBooking> {
       drawer: MenuLateral(),
       backgroundColor: grisFondo,
       key: scaffolKey,
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
+      body: Container(
+        //alignment: Alignment.center,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -90,11 +90,9 @@ class _PlayerBookingState extends State<PlayerBooking> {
         if (snapshot.hasData) {
           if (snapshot.data.length > 0) {
             _nroReg = snapshot.data.length;
-            //print('Nro register => ${snapshot.data.length}');
+           // print('Nro register => ${snapshot.data.length}');
             //print('Nro player => ${widget.player}');
-
             //print(  snapshot.data[0].fullName);
-
             return Container(
               padding: const EdgeInsets.only(left:20.0,right: 20.0),
               child: Column(

@@ -1,7 +1,7 @@
 // To parse this JSON data, do
 //
 //     final player = playerFromJson(jsonString);
-
+/*
 import 'dart:convert';
 
 Player playerFromJson(String str) => Player.fromJson(json.decode(str));
@@ -39,3 +39,4 @@ class Player {
         "booking_id": bookingId,
       };
 }
+*/

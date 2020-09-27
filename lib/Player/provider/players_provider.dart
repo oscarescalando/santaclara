@@ -23,7 +23,7 @@ class PlayersProvider {
   }
 
 
-  Future<bool> getData(Player item) async {
+  Future<bool> getNewPlayer(Player item) async {
     String url = api + 'players';
     print(url);
     var response = await http.post(
