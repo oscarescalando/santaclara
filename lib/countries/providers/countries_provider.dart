@@ -1,20 +1,22 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
-class _CountriesProvider {
+import 'package:santaclara/countries/model/countries_model.dart';
+
+class CountriesProvider {
   List<dynamic> opciones = [];
 
-  _CountriesProvider() {
+  CountriesProvider() {
     //cargarData();
   }
 
   Future<List<dynamic>> cargarData() async {
     final resp = await rootBundle.loadString('data/countries_list.json');
 
-    Map dataMap = json.decode(resp);
-    opciones = dataMap['countries'];
-
-    return opciones;
+    final dataMap = json.decode(resp);
+    final country = new Countries.fronJsonList(dataMap['countries']);
+    //print(opciones);
+    return country.items;
   }
 
   Future<String> getMyCountry(String id) async {
@@ -29,4 +31,4 @@ class _CountriesProvider {
   }
 }
 
-final menuProvider = new _CountriesProvider();
+//final countriesProvider = new _CountriesProvider();

@@ -18,31 +18,26 @@ class PlayersProvider {
     final decodeData = json.decode(resp.body);
     final players = new Players.fronJsonList(decodeData['data']);
 
-    print(players.items);
+    //print(players.items);
     return players.items;
   }
-
 
   Future<bool> getNewPlayer(Player item) async {
     String url = api + 'players';
     print(url);
-    var response = await http.post(
-        url,
-        headers: headers,
-        body: json.encode(item.toJson()))
+    var response = await http
+        .post(url, headers: headers, body: json.encode(item.toJson()))
         .then((data) {
-          if (data.statusCode == 201) {
-            //return APIResponse<bool>(data: true);
-            print('ok');
-            return true;
-          } else {
-            print('error   ${data.statusCode}');
-            return false;
-          }
-        })
-        .catchError((_) =>
-          print('An error occured')
-          //return false
-        );
+      if (data.statusCode == 201) {
+        //return APIResponse<bool>(data: true);
+        print('ok');
+        return true;
+      } else {
+        print('error   ${data.statusCode}');
+        return false;
+      }
+    }).catchError((_) => print('An error occured')
+            //return false
+            );
   }
 }
